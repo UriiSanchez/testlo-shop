@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 
 import { lightTheme } from "../themes";
-import { UIProvider } from "../context";
+import { UIProvider, AuthProvider } from "../context";
 
 import "../styles/globals.css";
 
@@ -15,12 +15,14 @@ export default function App({ Component, pageProps }: AppProps) {
 					fetch(resource, init).then((res) => res.json()),
 			}}
 		>
-			<UIProvider>
-				<ThemeProvider theme={lightTheme}>
-					<CssBaseline />
-					<Component {...pageProps} />
-				</ThemeProvider>
-			</UIProvider>
+			<AuthProvider>
+				<UIProvider>
+					<ThemeProvider theme={lightTheme}>
+						<CssBaseline />
+						<Component {...pageProps} />
+					</ThemeProvider>
+				</UIProvider>
+			</AuthProvider>
 		</SWRConfig>
 	);
 }

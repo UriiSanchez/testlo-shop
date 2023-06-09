@@ -1,4 +1,5 @@
 export * as db from "./db";
+export * as dbUser from "./dbUsers";
 export * from "./constants";
 
 //Base de datos de prueba

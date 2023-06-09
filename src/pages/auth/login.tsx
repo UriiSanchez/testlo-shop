@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 import {
 	Box,
 	Button,
@@ -35,14 +36,15 @@ const LoginPage = () => {
 
 	const onLogin = async ({ email, password }: FormData) => {
 		setShowError(false);
-		const isValidLogin = await loginUser(email, password);
-		if (!isValidLogin) {
-			setShowError(true);
-			setTimeout(() => setShowError(false), 3000);
-			return;
-		}
-		const destination = router.query.p?.toString() || "/";
-		router.replace(destination);
+		// const isValidLogin = await loginUser(email, password);
+		// if (!isValidLogin) {
+		// 	setShowError(true);
+		// 	setTimeout(() => setShowError(false), 3000);
+		// 	return;
+		// }
+		// const destination = router.query.p?.toString() || "/";
+		// router.replace(destination);
+		await signIn("credentials", { email, password });
 	};
 
 	return (
